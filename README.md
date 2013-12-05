@@ -3,7 +3,7 @@ _jQuery function renameTag_
 
 ## Description
 
-Simply rename you HTML-tags with one call.
+Simply rename your HTML-tags with one call.
 
 ## Usage / Example
 
