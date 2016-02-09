@@ -1,20 +1,24 @@
-if (jQuery) {
-	jQuery.fn.renameTag=function(renameTag) {
-		this.each(function() {
-			// Get current object
-			var $this=$(this);
+(function(jQuery) {
+    jQuery.fn.renameTag=function(renameTag) {
+        this.each(function() {
+            // Get current object
+            var $this=jQuery(this);
+            var element = $this[0];
+            // Create new object
+            var $newElement = jQuery('<'+renameTag+'></'+renameTag+'>');
 
-			// Create reg-expressions
-			var startTagRegExp=new RegExp("^<"+$this[0].tagName, "i");
-			var endTagRegExp=new RegExp($this[0].tagName+">$", "i");
+            // Copy Attribute
+            jQuery.each(element.attributes, function(i,attr) {
+                $newElement.attr(attr.nodeName,attr.nodeValue);
+            });
 
-			// Create new named tag
-			var $newElement=$($this.get(0).outerHTML.replace(startTagRegExp, "<"+renameTag).replace(endTagRegExp, "</+"+renameTag+">")).html($this.html());
+            // Set html of the new element
+            $newElement.html($this.html());
+            // Replace old element with new
+            $this.replaceWith($newElement);
 
-			// Replace origin tag with new created/renamed tag
-			$this.replaceWith($newElement);
-		});
+        });
 
-		return this;
-	}
-}
+        return this;
+    }
+})(jQuery);
